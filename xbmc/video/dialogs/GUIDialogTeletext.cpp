@@ -122,16 +122,16 @@ void CGUIDialogTeletext::OnInitWindow()
   if (CSettings::Get().GetBool("videoplayer.teletextscale"))
   {
     /* Fixed aspect ratio to 4:3 for teletext */
-    left = g_graphicsContext.ScaleFinalXCoord((float)(m_coordsRes.iWidth-m_coordsRes.iHeight*4/3)/2, 0);
-    right = g_graphicsContext.ScaleFinalXCoord((float)m_coordsRes.iWidth-left, 0);
+    left = (m_coordsRes.iWidth-m_coordsRes.iHeight*4/3)/2;
+    right = m_coordsRes.iWidth-left;
   }
   else
   { 
-    left = g_graphicsContext.ScaleFinalXCoord(0, 0);
-    right = g_graphicsContext.ScaleFinalXCoord((float)m_coordsRes.iWidth, 0);
+    left = 0;
+    right = m_coordsRes.iWidth;
   }
-  top = g_graphicsContext.ScaleFinalYCoord(0, 0);
-  bottom = g_graphicsContext.ScaleFinalYCoord(0, (float)m_coordsRes.iHeight);
+  top = 0;
+  bottom = m_coordsRes.iHeight;
 
   m_vertCoords.SetRect(left,
                        top,
