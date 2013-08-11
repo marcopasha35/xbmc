@@ -129,7 +129,7 @@ bool CWinSystemEGL::InitWindowSystem()
   m_egl->GetQuirks(&quirks);
   if (quirks & EGL_QUIRK_NEED_WINDOW_FOR_RES)
   {
-    RESOLUTION_INFO temp;
+    RESOLUTION_INFO temp = CDisplaySettings::Get().GetCurrentResolution();
     CreateWindow(temp);
   }
 

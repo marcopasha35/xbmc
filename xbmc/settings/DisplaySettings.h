@@ -54,7 +54,7 @@ public:
    \sa GetResolutionInfo
    \sa GetDisplayResolution
    */
-  RESOLUTION GetCurrentResolution() const { return m_currentResolution; }
+  RESOLUTION GetCurrentResolution() const { printf("GetCurrentResolution()=%d size=%d\n", m_currentResolution, m_resolutions.size()); return m_currentResolution; }
   void SetCurrentResolution(RESOLUTION resolution, bool save = false);
   /*!
    \brief Returns the best-matching resolution of the videoscreen.screenmode setting value

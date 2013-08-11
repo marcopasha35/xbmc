@@ -203,6 +203,7 @@ bool CDisplaySettings::Save(TiXmlNode *settings) const
 void CDisplaySettings::Clear()
 {
   CSingleLock lock(m_critical);
+printf("CDisplaySettings::Clear\n");
   m_calibrations.clear();
   m_resolutions.clear();
 
@@ -283,6 +284,8 @@ bool CDisplaySettings::OnSettingUpdate(CSetting* &setting, const char *oldSettin
 
 void CDisplaySettings::SetCurrentResolution(RESOLUTION resolution, bool save /* = false */)
 {
+printf("CDisplaySettings::SetCurrentResolution %d (%d)\n", resolution, save);
+
   if (save)
   {
     string mode = GetStringFromResolution(resolution);
@@ -362,6 +365,7 @@ void CDisplaySettings::AddResolutionInfo(const RESOLUTION_INFO &resolution)
       res.dwFlags  |= D3DPRESENTFLAG_MODE3DTB;
     }
   }
+printf("AddResolutionInfo %dx%d\n", res.iWidth, res.iHeight);
   m_resolutions.push_back(res);
 }
 

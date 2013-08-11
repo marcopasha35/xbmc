@@ -20,6 +20,7 @@
 
 #include "PowerSyscallVirtualSleep.h"
 #include "guilib/Key.h"
+#include "utils/log.h"
 
 bool CPowerSyscallVirtualSleep::Suspend()
 {
@@ -55,6 +56,8 @@ bool CPowerSyscallVirtualSleep::PumpPowerEvents(IPowerEventsCallback *callback)
 
 bool CPowerSyscallVirtualSleep::ProcessAction(const CAction& action)
 {
+      CLog::Log(LOGDEBUG, "CPowerSyscallVirtualSleep::ProcessAction: %d,%d %d,%d [%s]", m_virtualSleepState, VIRTUAL_SLEEP_STATE_ASLEEP, action.GetID(), ACTION_BUILT_IN_FUNCTION, action.GetName().c_str());
+
   if (m_virtualSleepState != VIRTUAL_SLEEP_STATE_ASLEEP)
     return false;
 
@@ -64,13 +67,15 @@ bool CPowerSyscallVirtualSleep::ProcessAction(const CAction& action)
   {
     CStdString name = action.GetName();
     name.ToLower();
-    if(name.Equals("shutdown") ||
+    if(name.Equals("xbmc.suspend()") ||
+       name.Equals("shutdown") ||
        name.Equals("suspend")  ||
        name.Equals("hibernate"))
     {
       if(VirtualWake())
       {
         m_virtualSleepState = VIRTUAL_SLEEP_STATE_WILL_WAKE;
+        CLog::Log(LOGDEBUG, "CPowerSyscallVirtualSleep::ProcessAction: Wake");
         return false;
       }
     }

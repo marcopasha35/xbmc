@@ -47,7 +47,7 @@
 #define GETFLAGS_MODE(f)        ( ( (f) >>24 ) & 0xff )
 
 //#ifndef DEBUG_PRINT
-//#define DEBUG_PRINT 1
+#define DEBUG_PRINT 1
 //#endif
 
 #if defined(DEBUG_PRINT)
@@ -252,6 +252,10 @@ int CEGLNativeTypeRaspberryPI::AddUniqueResolution(const RESOLUTION_INFO &res, s
 bool CEGLNativeTypeRaspberryPI::SetNativeResolution(const RESOLUTION_INFO &res)
 {
 #if defined(TARGET_RASPBERRY_PI)
+  DLOG("CEGLNativeTypeRaspberryPI::SetNativeResolution %dx%d %x\n", res.iScreenWidth, res.iScreenHeight, res.dwFlags);
+  CLog::Log(LOGDEBUG, "Early EGL set resolution %dx%d -> %dx%d @ %.2f fps (%d,%d) flags:%x aspect:%.2f\n",
+      m_width, m_height, 0,0, res.fRefreshRate, GETFLAGS_GROUP(res.dwFlags), GETFLAGS_MODE(res.dwFlags), (int)res.dwFlags, res.fPixelRatio);
+
   if(!m_DllBcmHost)
     return false;
 
@@ -332,6 +336,7 @@ bool CEGLNativeTypeRaspberryPI::SetNativeResolution(const RESOLUTION_INFO &res)
 
     m_desktopRes = res;
   }
+  DLOG("CEGLNativeTypeRaspberryPI::SetNativeResolution powered on\n");
 
   m_dispman_display = m_DllBcmHost->vc_dispmanx_display_open(0);
 
