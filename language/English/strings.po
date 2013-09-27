@@ -14834,7 +14834,13 @@ msgctxt "#36545"
 msgid "Use higher quality textures for covers and fanart"
 msgstr ""
 
-#empty strings from id 36545 to 36999
+#: system/settings/rbp.xml
+msgctxt "#36546"
+msgid "Enable 720p GUI resolution limit. Requires a restart"
+msgstr ""
+
+#empty strings from id 36547 to 36999
+
 #reserved strings 365XX
 
 #: xbmc/cores/dvdplayer/DVDInputStreams/DVDInputStreamNavigator.cpp
@@ -14901,4 +14907,9 @@ msgid "Enables system keys like printscreen, alt-tab and volume keys when in ful
 #: system/settings/rbp.xml
 msgctxt "#37020"
 msgid "Enable 32 bit textures"
+msgstr ""
+
+#: system/settings/rbp.xml
+msgctxt "#37021"
+msgid "Enable 720p GUI resolution limit"
 msgstr ""
