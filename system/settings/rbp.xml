@@ -12,6 +12,11 @@
         <setting id="videoplayer.synctype">
           <visible>false</visible>
         </setting>
+        <setting id="videoplayer.lowlatency" type="boolean" label="37022" help="36547">
+          <level>2</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
       </group>
     </category>
   </section>
