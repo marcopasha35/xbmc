@@ -36,7 +36,7 @@ bool InfoBool::operator==(const InfoBool &right) const
 InfoSingle::InfoSingle(const CStdString &expression, int context)
 : InfoBool(expression, context)
 {
-  m_condition = g_infoManager.TranslateSingleString(expression);
+  m_condition = g_infoManager.TranslateSingleString(expression, &m_listItemDependent);
 }
 
 void InfoSingle::Update(const CGUIListItem *item)
@@ -88,7 +88,9 @@ void InfoExpression::Parse(const CStdString &expression)
       // cleanup any operand, translate and put into our expression list
       if (!operand.empty())
       {
-        unsigned int info = g_infoManager.Register(operand, m_context);
+        bool listItemDependent;
+        unsigned int info = g_infoManager.Register(operand, m_context, &listItemDependent);
+        m_listItemDependent |= listItemDependent;
         if (info)
         {
           m_postfix.push_back(m_operands.size());
@@ -134,7 +136,9 @@ void InfoExpression::Parse(const CStdString &expression)
 
   if (!operand.empty())
   {
-    unsigned int info = g_infoManager.Register(operand, m_context);
+    bool listItemDependent;
+    unsigned int info = g_infoManager.Register(operand, m_context, &listItemDependent);
+    m_listItemDependent |= listItemDependent;
     if (info)
     {
       m_postfix.push_back(m_operands.size());

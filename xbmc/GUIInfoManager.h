@@ -726,7 +726,7 @@ public:
 
    \sa GetBoolValue
    */
-  unsigned int Register(const CStdString &expression, int context = 0);
+  unsigned int Register(const CStdString &expression, int context = 0, bool *listItemDependent = NULL);
 
   /*! \brief Get a previously registered boolean expression's value
    Checks the cache and evaluates the boolean expression if required.
@@ -838,7 +838,7 @@ public:
   void ResetLibraryBools();
   CStdString LocalizeTime(const CDateTime &time, TIME_FORMAT format) const;
 
-  int TranslateSingleString(const CStdString &strCondition);
+  int TranslateSingleString(const CStdString &strCondition, bool *listItemDependent = NULL);
 
   int RegisterSkinVariableString(const INFO::CSkinVariableString* info);
   int TranslateSkinVariableString(const CStdString& name, int context);
